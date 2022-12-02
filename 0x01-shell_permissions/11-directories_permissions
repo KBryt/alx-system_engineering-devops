@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chmod -R +11 */
+chmod a+x */
