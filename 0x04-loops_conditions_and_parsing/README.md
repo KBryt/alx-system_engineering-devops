@@ -9,9 +9,9 @@
 - [Comparison operators](https://tldp.org/LDP/abs/html/comparison-ops.html)
 - [File test operators](https://tldp.org/LDP/abs/html/fto.html)
 - [Make your scripts portable](https://www.cyberciti.biz/tips/finding-bash-perl-python-portably-using-env.html)
+- [SSH key Task 0](https://www.youtube.com/watch?v=-CCCNmD0i2o)
 
-**man or help**
-
+**man or help**https://www.youtube.com/watch?v=-CCCNmD0i2o
 - `env`
 - `cut`
 - `for`
