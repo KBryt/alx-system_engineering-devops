@@ -1,8 +1,6 @@
 0x06. Regular expression
 ========================
 
--   By Sylvain Kalache
-
 #### In a nutshell...
 
 Concepts
