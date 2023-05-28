@@ -1,3 +1,7 @@
+# Distributed web infrastructure
+
+![Image of distributed web infrastructure](1-distributed_web_infrastructure.jpg)
+
 ## Description
 This infrastructure is designed to distribute web traffic across multiple servers, reducing the load on the primary server. 
 It achieves this by utilizing a load balancer that evenly distributes the workload between the primary server and a replica server.
