@@ -4,7 +4,7 @@
 ## Description
 This is a basic web infrastructure that operates as a hosting platform for a website accessible via www.foobar.com. There are no security measures such as firewalls or SSL certificates implemented to safeguard the server's network. All components, including the database and application server, are required to utilize the server's shared resources, including CPU, RAM, and SSD storage.
 
-##Specifics About This Infrastructure
+## Specifics About This Infrastructure
 + What is a Server?
   A server is a computing system, comprising either hardware or software, that offers various services to other computers known as clients.
 + The domain name plays a crucial role in providing a user-friendly alias for an IP address. For instance, instead of remembering and typing a complex IP
@@ -23,7 +23,7 @@ To maintain a collection of organized information that can easily be accessed, m
 + What the server uses to communicate with the client (computer of the user requesting the website).
 Communication between the client and the server occurs over the internet network through the TCP/IP protocol suite.
 
-##Issues With This Infrastructure
+## Issues With This Infrastructure
 + There are multiple SPOF (Single Point Of Failure) in this infrastructure.
 For example, if the MySQL database server is down, the entire site would be down.
 + Downtime when maintenance needed.
