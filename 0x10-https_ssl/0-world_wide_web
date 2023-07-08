@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2086
-# display information about subdomains.
-if [ $# -eq 1 ]
+# Get DNA record information for the specified domain and
+# subdomain
+if [ "$#" -lt 2 ]
 then
-	sub_domains='www lb-01 web-01 web-02'
+    for subd in www lb-01 web-01 web-02
+    do
+	dig "$subd.$1" | awk -v subd="$subd" '/ANSWER SECTION:/ {
+                                              getline; print "The subdomain",
+                                              subd,"is a",
+                                              $(NF-1),"record and points",
+                                              "to",$NF
+                                             }'
+
+   done
 else
-	sub_domains="$2"
+    dig "$2.$1" | awk -v subd="$2" '/ANSWER SECTION:/ {
+                                              getline; print "The subdomain",
+                                              subd,"is a",
+                                              $(NF-1),"record and points",
+                                              "to",$NF
+                                             }'
 fi
-for sub in $sub_domains
-do
-	echo -n "The subdomain $sub"
-	dig "$sub.$1" | awk 'NR == 14 {printf " is a %s record and points to %s\n", $4, $5}'
-done
