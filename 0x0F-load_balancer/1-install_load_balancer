@@ -1,38 +1,17 @@
 #!/usr/bin/env bash
-# Installs, configures, and starts the load balancer
-# Update package lists
-sudo apt-get update
+#configures a new Ubuntu machine nginx
+apt-get update
+apt-get install software-properties-common -y
+add-apt-repository ppa:vbernat/haproxy-1.7 -y
+apt-get update
+apt-get install haproxy=1.7.\* -y
+echo "frontend web-front
+        bind *:80
+        default_backend web-backend
 
-# Install HAProxy
-sudo apt-get install haproxy -y
-
-# Configure HAProxy
-sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOT
-global
-    daemon
-    maxconn 256
-
-defaults
-    mode http
-    timeout connect 5000ms
-    timeout client 50000ms
-    timeout server 50000ms
-
-frontend http_front
-    bind *:80
-    default_backend http_back
-
-backend http_back
-    balance roundrobin
-    server web-01 100.26.225.174:80 check
-    server web-02 18.209.224.170:80 check
-EOT
-
-# Test HAProxy configuration
-sudo haproxy -c -f /etc/haproxy/haproxy.cfg
-
-# Start HAProxy
-sudo systemctl start haproxy
-
-# Enable HAProxy to start on boot
-sudo systemctl enable haproxy
+backend web-backend
+        balance roundrobin
+        server web1 35.227.47.184:80 check
+        server web2 35.190.188.208:80 check
+" | sudo tee -a /etc/haproxy/haproxy.cfg
+sudo service haproxy start
