@@ -1,50 +1,37 @@
 #!/usr/bin/env bash
-# configure web-02 to be identical to web-01
-# The name of the custom HTTP header must be X-Served-By
-# The value of the custom HTTP header must be the hostname of the server Nginx is running on
-#!/usr/bin/env bash
+# shellcheck disable=SC2016
+# Set up new nginx server and add custom response header
+# with hostname in new nginx configuration.
 
-# Update package repositories
-sudo apt-get -y update
+apt-get update -y && \
+apt-get install -y nginx && \
+echo -e \
+'http {
+    add_header X-Served-By $hostname;
 
-# Install Nginx
-sudo apt-get -y install nginx
+    root /var/www/holberton;
 
-# Allow Nginx HTTP traffic
-sudo ufw allow 'Nginx HTTP'
-
-# Create necessary directories and set permissions
-sudo mkdir -p /var/www/html /var/www/error
-sudo chmod -R 755 /var/www
-
-# Create index and 404 pages
-echo 'Hello World!' | sudo tee /var/www/html/index.html >/dev/null
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html >/dev/null
-
-# Configure Nginx with custom header
-server_config=$(cat <<EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-    server_name _;
-    add_header X-Served-By \$hostname;
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-    if (\$request_filename ~ redirect_me) {
-        rewrite ^ https://youtube.com permanent;
-    }
-    error_page 404 /404.html;
-    location = /404.html {
-        internal;
+    server {
+        listen 80;
+        server_name pearmountain.space;
+        error_page 404 /404_file_not_found.html;
+        rewrite ^/redirect_me/? https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        location / {
+            index index.html;
+        }
+        location /404_file_not_found.html {
+            internal;
+        }
     }
 }
-EOF
-)
+events {
+}' > /etc/nginx/nginx.conf
 
-echo "$server_config" | sudo tee /etc/nginx/sites-enabled/default >/dev/null
+mkdir -p /var/www/holberton
 
-# Restart Nginx service
-sudo service nginx restart
+echo "Holberton School" > \
+    /var/www/holberton/index.html
+echo "Ceci n'est pas une page" > \
+    /var/www/holberton/404_file_not_found.html
+
+service nginx restart
