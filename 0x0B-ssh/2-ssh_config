@@ -19,3 +19,6 @@ Host *
 #   IdentityFile ~/.ssh/id_rsaty
 #   IdentityFile ~/.ssh/id_dsa
 #   IdentityFile ~/.ssh/id_ecdsa
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
