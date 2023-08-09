@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 i<<<<<< HEAD
+=======
+>>>>>>> refs/remotes/origin/master
 #!/usr/bin/env bash
 # server-01 login
 
 
+<<<<<<< HEAD
 =======
 #!/usr/bin/env/ bash
 # server-01 login
 
 >>>>>>> 61c48d55f0a9cb8aaaadd5bc359661372fdb5fe7
+=======
+>>>>>>> refs/remotes/origin/master
 eval $("ssh-agent")
 
 ssh-add ~/.ssh/school
