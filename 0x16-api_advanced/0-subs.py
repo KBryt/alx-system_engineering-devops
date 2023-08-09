@@ -3,7 +3,7 @@
 number of subscribers for a given subreddit. """
 
 import requests
-headers = {"User-Agent": "ubuntu:hbtn:v1.0 (by /u/Certifieddonnie)"}
+headers = {"User-Agent": "ubuntu:hbtn:v1.0 (by /u/KBryt)"}
 
 
 def number_of_subscribers(subreddit):
