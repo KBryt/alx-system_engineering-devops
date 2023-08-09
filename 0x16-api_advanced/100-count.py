@@ -9,7 +9,6 @@ import re
 import requests
 headers = {'User-Agent': 'ubuntu:hbtn:v1.0 (by /u/KBryt)'}
 
-
 def count_words(subreddit, word_list, after='', occurs={}):
     """
         Recursive function that queries the Reddit API, parses the title of all
